@@ -9,8 +9,12 @@ public class Flight {
     private int availableSeats;
     private double baseFare;
     private boolean fullCapacity;
+    private Date flightDate;
 
-    public Flight(String flightId, String origin, String destination, boolean isInternational, int totalSeats, double baseFare) {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    public Flight(String flightId, String origin, String destination, boolean isInternational,
+                  int totalSeats, double baseFare, String flightDate) throws ParseException {
         this.flightId = flightId;
         this.origin = origin;
         this.destination = destination;
@@ -19,29 +23,25 @@ public class Flight {
         this.availableSeats = totalSeats;
         this.baseFare = baseFare;
         this.fullCapacity = false;
+        this.flightDate = dateFormat.parse(flightDate);
     }
 
-    // Getter for totalSeats
     public int getTotalSeats() {
         return totalSeats;
     }
 
-    // Getter for availableSeats
     public int getAvailableSeats() {
         return availableSeats;
     }
 
-    // Getter for flightId
     public String getFlightId() {
         return flightId;
     }
 
-    // Getter for origin
     public String getOrigin() {
         return origin;
     }
 
-    // Getter for destination
     public String getDestination() {
         return destination;
     }
@@ -50,15 +50,19 @@ public class Flight {
         return baseFare;
     }
 
+    public String getFlightDate() {
+        return dateFormat.format(flightDate);
+    }
+
     public synchronized boolean bookSeats(int seatsRequested) {
         if (seatsRequested > availableSeats) {
-            return false; // Not enough seats available
+            return false;
         } else {
             availableSeats -= seatsRequested;
             if (availableSeats == 0) {
                 fullCapacity = true;
             }
-            return true; // Seats successfully booked
+            return true;
         }
     }
 
@@ -75,3 +79,5 @@ public class Flight {
         return String.valueOf(isInternational);
     }
 }
+
+
