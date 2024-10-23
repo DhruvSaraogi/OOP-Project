@@ -1,5 +1,8 @@
 package com.airline.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Flight {
     private String flightId;
     private String origin;
