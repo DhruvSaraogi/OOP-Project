@@ -1,4 +1,4 @@
-package com.airline.manager;
+package com.airline.manager
 
 import com.airline.model.Flight;
 import java.util.*;
